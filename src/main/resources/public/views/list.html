@@ -1,0 +1,59 @@
+<html dir="rtl">
+<body dir="rtl">
+<h2 dir="rtl">שאלות <a class="btn btn-primary pull-right" href="#/create"><i
+        class="icon-plus-sign icon-white"></i> New Todo</a></h2>
+<form dir="rtl" ,ng-app="todoapp" , ng-controller="ListCtrl", ng-submit="getans()">
+<table dir="rtl" class="table">
+    <tr i>
+        <th>
+            #
+        </th>
+        <th>
+         שאלה
+        </th>
+        <th>
+            תשובות
+        </th>
+        <th></th>
+    </tr>
+    <tr name="tr {{$index+1}}" class="success-{{todo.done}}" ng-repeat="todo in todos">
+        <td>{{$index+1}}</td>
+        <td>
+            {{todo.title}}
+        </td>
+        <td>
+            <input type="radio" name={{$index+1}} value={{todo.test[0]}}> {{todo.test[0]}} <br>
+            <input type="radio" name={{$index+1}} value={{todo.test[1]}}>  {{todo.test[1]}} <br>
+            <input type="radio" name={{$index+1}} value={{todo.test[2]}}> {{todo.test[2]}}<br>
+            <input type="radio" name={{$index+1}} value={{todo.test[3]}}> {{todo.test[3]}}<br>
+            <input type="radio" name="answer {{$index+1}} " value={{todo.answer[0]}} style="display:none"/>
+        </td>
+        <td>
+            
+            <input type="checkbox" ng-change="todoStatusChanged(todo)" ng-value="todo.done" ng-model="todo.done">
+        </td>
+    </tr>
+</table>
+{{x}} fdfsfdsdsf    
+ <input type="submit" value="Submit">
+</form>
+</body>
+</html>
+<script type="text/javascript">
+    function get_action(form) {
+        for (var j = 1 ;j < 11; j++) {
+            var radios = document.getElementsByName(j.toString());
+            for (var i = 0, length = radios.length; i < length; i++) {
+                    if (radios[i].checked) {
+                        var x = "answer " + j.toString();
+                        if (radios[i].value.localeCompare(document.getElementsByName(x)[0].value) == 0){
+                            alert("true");
+                        }
+                        // only one radio can be logically checked, don't check the rest
+                        break;
+                    }
+    }
+    }
+}
+</script>
+
