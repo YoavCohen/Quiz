@@ -64,4 +64,9 @@ public class TodoService {
         collection.update(new BasicDBObject("_id", new ObjectId(todoId)), new BasicDBObject("$set", new BasicDBObject("done", todo.isDone())));
         return this.find(todoId);
     }
+    
+    public Todo delete(String todoId, String body){
+    	collection.remove(new BasicDBObject("_id", new ObjectId(todoId)));
+    	return null;
+    }
 }

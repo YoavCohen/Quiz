@@ -16,11 +16,37 @@
     }).when('/create', {
         templateUrl: 'views/create.html',
         controller: 'CreateCtrl'
+    }).when('/yoav', {
+        templateUrl: 'views/get.html',
+        controller: 'AllCtrl'
     }).otherwise({
         redirectTo: '/'
     })
 });
 
+
+ app.controller('AllCtrl', function ($scope, $http, $location, $route) {
+    $http.get('/api/v1/getall').success(function (data) {
+        $scope.todos = data;
+    }).error(function (data, status) {
+        console.log('Error ' + data)
+    })
+
+    $scope.todoStatusChanged = function (todo) {
+        console.log(todo);
+        $http.put('/api/v1/todos/' + todo.id, todo).success(function (data) {
+            console.log('status changed');
+            $location.path('/yoav');
+            $route.reload();
+        }).error(function (data, status) {
+            console.log('Error ' + data)
+        })
+    }
+
+}
+
+
+);
 
 
 
@@ -66,7 +92,6 @@
 
 
     $scope.createTodo = function () {
-        alert("1");
         console.log($scope.todo);
         $http.post('/api/v1/todos', $scope.todo).success(function (data) {
             $location.path('/');

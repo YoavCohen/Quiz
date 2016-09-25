@@ -40,9 +40,17 @@ public class TodoResource {
 
                 -> todoService.Rand(), new JsonTransformer());
 
+        get(API_CONTEXT + "/getall", "application/json", (request, response)
+
+                -> todoService.findAll(), new JsonTransformer());
+        
+   
+        
         put(API_CONTEXT + "/todos/:id", "application/json", (request, response)
 
-                -> todoService.update(request.params(":id"), request.body()), new JsonTransformer());
+                -> todoService.delete(request.params(":id"), request.body()), new JsonTransformer());
+    
+    
     }
 
 
