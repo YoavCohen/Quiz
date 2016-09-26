@@ -25,6 +25,7 @@ public class Todo {
     private String answer4;
     private String answer[]= new String[4];
     private List<String> test= new ArrayList<String>();
+    
     public Todo(BasicDBObject dbObject) {
         this.id = ((ObjectId) dbObject.get("_id")).toString();
         this.title = dbObject.getString("title");

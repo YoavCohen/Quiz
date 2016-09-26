@@ -74,10 +74,13 @@
             var radios = document.getElementsByName(j.toString());
             for (var i = 0, length = radios.length; i < length; i++) {
                 if (radios[i].checked) {
+                    var selector = 'label[for=' + radios[i].id + ']'
+                    var label = document.querySelector(selector);
                     if(radios[i].value.localeCompare($scope.todos[j-1].coranswer)==0)
-                      document.getElementsByName(x)[0].style.backgroundColor="green";
+                      alert("right");
                     else{
-                        document.getElementsByName(x)[0].style.backgroundColor="red";
+                        radios[i].style.color="red";
+                        label.style.color="red";
                     }
             }
         }

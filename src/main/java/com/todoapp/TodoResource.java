@@ -1,11 +1,6 @@
 package com.todoapp;
 
-import com.google.gson.Gson;
-import spark.Request;
-import spark.Response;
-import spark.Route;
-
-import java.util.HashMap;
+	
 
 import static spark.Spark.get;
 import static spark.Spark.post;
@@ -44,7 +39,6 @@ public class TodoResource {
 
                 -> todoService.findAll(), new JsonTransformer());
         
-   
         
         put(API_CONTEXT + "/todos/:id", "application/json", (request, response)
 

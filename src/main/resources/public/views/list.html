@@ -1,14 +1,15 @@
 <html dir="rtl">
+<head>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
 <body dir="rtl">
-<a class="btn btn-primary pull-right" href="#/create"><i
-        class="icon-plus-sign icon-white"></i>הוסף שאלה</a>
-<a class="btn btn-primary pull-right" href="#/yoav"><i
-        class="icon-plus-sign icon-white"></i> ניהול</a>
+    <div class="container">
 <form dir="rtl" ,ng-app="todoapp" , ng-controller="ListCtrl", ng-submit="getans()">
+
 <table dir="rtl" class="table">
     <tr i>
         <th>
-            #
+            
         </th>
         <th>
          שאלה
@@ -23,22 +24,46 @@
         <td>
             {{todo.title}}
         </td>
-        <td>
-            <input type="radio" name={{$index+1}} value={{todo.test[0]}}> {{todo.test[0]}} <br>
-            <input type="radio" name={{$index+1}} value={{todo.test[1]}}>  {{todo.test[1]}} <br>
-            <input type="radio" name={{$index+1}} value={{todo.test[2]}}> {{todo.test[2]}}<br>
-            <input type="radio" name={{$index+1}} value={{todo.test[3]}}> {{todo.test[3]}}<br>
-            <input type="radio" name="answer {{$index+1}} " value={{todo.answer[0]}} style="display:none"/>
-        </td>
-        <td>
-            
-            <input type="checkbox" ng-change="todoStatusChanged(todo)" ng-value="todo.done" ng-model="todo.done">
+
+
+
+
+        <td dir="rtl">  
+          <ul dir="rtl">
+  <li>
+    <input type="radio" name={{$index+1}} id="a-option-{{$index+1}}" value={{todo.test[0]}}> 
+    <label for="a-option-{{$index+1}}">{{todo.test[0]}}</label>
+    <div class="check"></div>
+  </li>
+  
+  <li>
+    <input type="radio" name={{$index+1}} id="b-option-{{$index+1}}" value={{todo.test[1]}}> 
+    <label for="b-option-{{$index+1}}">{{todo.test[1]}}</label>
+    <div class="check"><div class="inside"></div></div>
+  </li>
+  
+   <li>
+    <input type="radio" name={{$index+1}} id="c-option-{{$index+1}}" value={{todo.test[2]}}> 
+    <label for="c-option-{{$index+1}}">{{todo.test[2]}}</label>
+    
+    <div class="check"><div class="inside"></div></div>
+  </li>
+
+     <li>
+    <input type="radio" name={{$index+1}} id="d-option-{{$index+1}}" value={{todo.test[3]}}> 
+    <label for="d-option-{{$index+1}}">{{todo.test[3]}}</label>
+    
+    <div class="check"><div class="inside"></div></div>
+  </li>
+
+</ul>
         </td>
     </tr>
 </table>
 {{x}} fdfsfdsdsf    
  <input type="submit" value="Submit">
 </form>
+</div>
 </body>
 </html>
 <script type="text/javascript">
