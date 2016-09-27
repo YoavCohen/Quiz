@@ -40,8 +40,9 @@ public class TodoService {
             DBObject dbObject = dbObjects.next();
             todos.add(new Todo((BasicDBObject) dbObject));
         }
-        Collections.shuffle(todos);
-        for(int i=0;i<10;i++)
+        for(int j=0;j<10;j++)
+        	Collections.shuffle(todos);
+        for(int i=0;i<5;i++)
         	ret.add(todos.get(i));
         return ret;
     }

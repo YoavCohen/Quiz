@@ -11,7 +11,7 @@ import static spark.SparkBase.staticFileLocation;
  */
 public class Bootstrap {
     private static final String IP_ADDRESS = System.getenv("OPENSHIFT_DIY_IP") != null ? System.getenv("OPENSHIFT_DIY_IP") : "localhost";
-    private static final int PORT = System.getenv("OPENSHIFT_DIY_IP") != null ? Integer.parseInt(System.getenv("OPENSHIFT_DIY_IP")) : 4001;
+    private static final int PORT = System.getenv("OPENSHIFT_DIY_IP") != null ? Integer.parseInt(System.getenv("OPENSHIFT_DIY_IP")) : 4027;
 
     public static void main(String[] args) throws Exception {
         setIpAddress(IP_ADDRESS);
@@ -27,6 +27,7 @@ public class Bootstrap {
             return mongoClient.getDB("todoapp");
         }
         int port = Integer.parseInt(System.getenv("OPENSHIFT_MONGODB_DB_PORT"));
+        System.out.println(port);
         String dbname = System.getenv("OPENSHIFT_APP_NAME");
         String username = System.getenv("OPENSHIFT_MONGODB_DB_USERNAME");
         String password = System.getenv("OPENSHIFT_MONGODB_DB_PASSWORD");

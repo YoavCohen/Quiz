@@ -69,7 +69,7 @@
     }
 
     $scope.getans = function(form){
-        for (var j = 1 ;j < 11; j++) {
+        for (var j = 1 ;j < 6; j++) {
             var x = "tr " + j.toString();
             var radios = document.getElementsByName(j.toString());
             for (var i = 0, length = radios.length; i < length; i++) {
@@ -77,7 +77,7 @@
                     var selector = 'label[for=' + radios[i].id + ']'
                     var label = document.querySelector(selector);
                     if(radios[i].value.localeCompare($scope.todos[j-1].coranswer)==0)
-                      alert("right");
+                        var s=1;
                     else{
                         radios[i].style.color="red";
                         label.style.color="red";
