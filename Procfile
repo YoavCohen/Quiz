@@ -1,1 +1,1 @@
-web: sh target/public
+web: sh target/classes/public
