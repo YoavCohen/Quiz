@@ -1,0 +1,214 @@
+<div>
+<form class="form-horizontal" role="form" ng-submit="createTodo()">
+    <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">Title</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="title" placeholder="Write todo.." ng-model="todo.title">
+        </div>
+
+        <br>
+            <label for="Answer1" class="col-sm-2 control-label">Answer1(Solution)</label>
+             <div class="col-sm-10">
+            <input type="text" class="form-control" id="answer1" placeholder="Answer 1" ng-model="todo.answer1">
+        </div>
+
+        <br>
+
+                   <label for="Answer2" class="col-sm-2 control-label">Answer2</label>
+             <div class="col-sm-10">
+            <input type="text" class="form-control" id="answer2" placeholder="Answer 2" ng-model="todo.answer2">
+        </div>
+
+        <br>
+
+                          <label for="Answer3" class="col-sm-2 control-label">Answer3</label>
+             <div class="col-sm-10">
+            <input type="text" class="form-control" id="answer3" placeholder="Answer 3" ng-model="todo.answer3">
+        </div>
+
+        <br>
+
+                                 <label for="Answer4" class="col-sm-2 control-label">Answer4</label>
+             <div class="col-sm-10">
+            <input type="text" class="form-control" id="answer4" placeholder="Answer 4" ng-model="todo.answer4">
+        </div>
+
+        <br>
+
+
+    </div>
+
+        <label for="Answer4" class="col-sm-2 control-label">Answer4</label>
+              <select name="singleSelect" id="coranswer" ng-model="todo.coranswer">
+             <option value={"1"}>1</option>
+             <option value="2">2</option>
+             <option value="3">3</option>
+             <option value="4">4</option>
+
+        </select><br>
+
+        <br>
+
+
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">New Todo</button>
+        </div>
+    </div>
+    <br>
+</form>
+
+
+
+
+package com.todoapp;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import org.bson.types.ObjectId;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * Created by shekhargulati on 09/06/14.
+ */
+public class Todo {
+
+    private String id;
+    private String title;
+    private boolean done;
+    private Date createdOn = new Date();
+    private int coranswer;
+    private String answer1;
+    private String answer2;
+    private String answer3;
+    private String answer4;
+    private String answer[]= new String[4];
+    private List<String> test= new ArrayList<String>();
+    public Todo(BasicDBObject dbObject) {
+        this.id = ((ObjectId) dbObject.get("_id")).toString();
+        this.title = dbObject.getString("title");
+        this.done = dbObject.getBoolean("done");
+        this.createdOn = dbObject.getDate("createdOn");
+        this.coranswer = dbObject.getInt("coranswer");
+        answer[0]=dbObject.getString("answer1");
+        answer[1]=dbObject.getString("answer2");
+        answer[2]=dbObject.getString("answer3");
+        answer[3]=dbObject.getString("answer4");
+        for(int i=0;i<4;i++)
+            test.add(i, answer[i]);
+        Collections.shuffle(test); //shuffle answers
+    }
+    
+    public void createAnswers(){
+        answer= new String[4];
+        answer[0]=answer1;
+        answer[1]=answer2;
+        answer[2]=answer3;
+        answer[3]=answer4;
+    }
+    
+    public int getcoranswer(){
+        return coranswer;
+    }
+    
+    public String[] getAnswers(){
+        return answer;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAnswer(int i) {
+        return answer[i-1];
+    }
+    
+    public boolean isDone() {
+        return done;
+    }
+
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>
+<form class="form-horizontal" role="form" ng-submit="createTodo()" ng-app="CreateCtrl">
+    <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">Title</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="title" placeholder="Write todo.." ng-model="todo.title">
+        </div>
+
+        <br>
+            <label for="Answer1" class="col-sm-2 control-label">Answer1(Solution)</label>
+             <div class="col-sm-10">
+            <input type="text" class="form-control" id="answer1" placeholder="Answer 1" ng-model="todo.answer1">
+        </div>
+
+        <br>
+
+                   <label for="Answer2" class="col-sm-2 control-label">Answer2</label>
+             <div class="col-sm-10">
+            <input type="text" class="form-control" id="answer2" placeholder="Answer 2" ng-model="todo.answer2">
+        </div>
+
+        <br>
+
+                          <label for="Answer3" class="col-sm-2 control-label">Answer3</label>
+             <div class="col-sm-10">
+            <input type="text" class="form-control" id="answer3" placeholder="Answer 3" ng-model="todo.answer3">
+        </div>
+
+        <br>
+
+                                 <label for="Answer4" class="col-sm-2 control-label">Answer4</label>
+             <div class="col-sm-10">
+            <input type="text" class="form-control" id="answer4" placeholder="Answer 4" ng-model="todo.answer4">
+        </div>
+
+        <br>
+
+
+    </div>
+
+        <label for="Answer4" class="col-sm-2 control-label">Answer4</label>
+              <select name="singleSelect" id="coranswer" ng-model="todo.coranswer">
+              <option value="0">1</option>
+              <option value="1">2</option>
+              <option value="2">3</option>
+              <option value="3">4</option>
+        </select><br>
+
+        <br>
+
+
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+             <button type="submit" class="btn btn-default">New Todo</button>
+        </div>
+    </div>
+    <br>
+</form>

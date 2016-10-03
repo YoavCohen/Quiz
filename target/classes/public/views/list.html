@@ -1,0 +1,104 @@
+<html dir="rtl">
+<head>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body dir="rtl">
+    <div class="container">
+<form dir="rtl" ,ng-app="todoapp" , ng-controller="ListCtrl", ng-submit="getans()">
+
+   <span ng-repeat="category in categories">
+      <label class="checkbox-inline"  ng-model="zoom" for="{{category.id}}">
+        <input type="checkbox" value="{{category.id}}" name="group" id="{{category.id}}" ng-checked="selection.contains(category)" ng-click="toggleSelection(category)" checked="checked"/>
+        {{category.title}}
+      </label>
+    </span>
+    <br>
+    מספר שאלות: 
+    <input type="number" min="1" max="30" value="15" ng-model="numberOfQuestions">
+<table dir="rtl" class="table">
+    <tr i>
+        <th>
+            
+        </th>
+        <th>
+         שאלה
+        </th>
+        <th>
+            תשובות
+        </th>
+        <th></th>
+    </tr>
+    <tr name="tr {{$index+1}}" class="success-{{todo.done}}" ng-repeat="todo in todos |limitTo: numberOfQuestions">
+        <td>{{$index+1}}</td>
+        <td>
+            {{todo.title}}
+        </td>
+
+
+
+
+        <td dir="rtl">  
+          <ul dir="rtl">
+  <li>
+    <input type="radio" name={{$index+1}} id="a-option-{{$index+1}}" value={{todo.test[0]}}> 
+    <label for="a-option-{{$index+1}}">{{todo.test[0]}}</label>
+    <div class="check"></div>
+  </li>
+  
+  <li>
+    <input type="radio" name={{$index+1}} id="b-option-{{$index+1}}" value={{todo.test[1]}}> 
+    <label for="b-option-{{$index+1}}">{{todo.test[1]}}</label>
+    <div class="check"><div class="inside"></div></div>
+  </li>
+  
+   <li>
+    <input type="radio" name={{$index+1}} id="c-option-{{$index+1}}" value={{todo.test[2]}}> 
+    <label for="c-option-{{$index+1}}">{{todo.test[2]}}</label>
+    
+    <div class="check"><div class="inside"></div></div>
+  </li>
+
+     <li>
+    <input type="radio" name={{$index+1}} id="d-option-{{$index+1}}" value={{todo.test[3]}}> 
+    <label for="d-option-{{$index+1}}">{{todo.test[3]}}</label>
+    
+    <div class="check "><div class="inside"></div></div>
+  </li>
+
+</ul>
+        </td>
+    </tr>
+</table>     
+ <center> <input type="submit" value="Submit" class="btn btn-default"> <button type="button" data-dismiss="modal" ng-click="ref()" class="btn btn-default" >Refresh Questions</button> </center>
+
+
+<!-- Modal -->
+<div id="myModal" dir="ltr" color="black" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+       <center> <h4 class="modal-title">Results</h4> </center>
+      </div>
+      <div class="modal-body">
+        <p id="modalText">Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <center>
+        <button type="button" class="btn btn-default" data-dismiss="modal">See Answers</button>
+        <button type="button" data-dismiss="modal" ng-click="ref()" class="btn btn-default" >Refresh Questions</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</form>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+</script>
+

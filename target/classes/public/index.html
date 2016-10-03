@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="todoapp">
+<head>
+    <title>Todo App</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<div class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">TodoApp</a>
+        </div>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="#yoav">Manage</a></li>
+      <li><a href="#create">Add Question</a></li> 
+    </ul>
+</div>
+
+<div class="container" ng-view="">
+
+
+</div>
+
+<script src="/js/jquery.js"></script>
+<script src="/js/angular.js"></script>
+<script src="/js/angular-route.js"></script>
+<script src="/js/angular-cookies.js"></script>
+<script src="/js/angular-sanitize.js"></script>
+<script src="/js/angular-resource.js"></script>
+<script src="/scripts/app.js"> </script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
