@@ -7,6 +7,7 @@ import org.bson.types.ObjectId;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -32,6 +33,36 @@ public class TodoService {
         return todos;
     }
     
+    public List<Todo> findAllFilterd(String body) {
+    	int i=0,j=0;
+    	Category[] arr = new Gson().fromJson(body, Category[].class);
+    
+    	ArrayList<String> strarr = new ArrayList<String>();
+    	for(int k=0;k<arr.length;k++)
+    		strarr.add(arr[k].getTitle());
+    	System.out.println(strarr);
+        List<Todo> todos = new ArrayList<>();
+        List<Todo> ret = new ArrayList<>();
+        DBCursor dbObjects = collection.find();
+        while (dbObjects.hasNext()) {
+            DBObject dbObject = dbObjects.next();
+            todos.add(new Todo((BasicDBObject) dbObject));
+        }
+        for(j=0;j<10;j++)
+        	Collections.shuffle(todos);
+        j=0;
+        while((j!=30)&&(i<todos.size())){
+        	if(strarr.contains(todos.get(i).getCategory())){
+        		ret.add(todos.get(i));
+        		j++;
+        	}
+        	i++;
+        }
+        return ret;
+    }
+    
+    
+    
     public List<Todo> Rand() {
         List<Todo> todos = new ArrayList<>();
         List<Todo> ret = new ArrayList<>();
@@ -42,10 +73,13 @@ public class TodoService {
         }
         for(int j=0;j<10;j++)
         	Collections.shuffle(todos);
-        for(int i=0;i<5;i++)
+        for(int i=0;i<30;i++)
         	ret.add(todos.get(i));
         return ret;
+        
     }
+    
+    
     
     
 
@@ -53,7 +87,7 @@ public class TodoService {
     	System.out.println(body);
         Todo todo = new Gson().fromJson(body, Todo.class);
         todo.createAnswers();
-        collection.insert(new BasicDBObject("title", todo.getTitle()).append("done", todo.isDone()).append("createdOn", new Date()).append("answer1", todo.getAnswer(1)).append("answer2", todo.getAnswer(2)).append("answer3", todo.getAnswer(3)).append("answer4", todo.getAnswer(4)).append("coranswer", todo.getcoranswer()));
+        collection.insert(new BasicDBObject("title", todo.getTitle()).append("done", todo.isDone()).append("createdOn", new Date()).append("answer1", todo.getAnswer(1)).append("answer2", todo.getAnswer(2)).append("answer3", todo.getAnswer(3)).append("answer4", todo.getAnswer(4)).append("coranswer", todo.getcoranswer()).append("category", todo.getCategory()));
     }
 
     public Todo find(String id) {

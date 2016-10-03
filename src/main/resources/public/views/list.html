@@ -6,6 +6,15 @@
     <div class="container">
 <form dir="rtl" ,ng-app="todoapp" , ng-controller="ListCtrl", ng-submit="getans()">
 
+   <span ng-repeat="category in categories">
+      <label class="checkbox-inline"  ng-model="zoom" for="{{category.id}}">
+        <input type="checkbox" value="{{category.id}}" name="group" id="{{category.id}}" ng-checked="selection.contains(category)" ng-click="toggleSelection(category)" checked="checked"/>
+        {{category.title}}
+      </label>
+    </span>
+    <br>
+    מספר שאלות: 
+    <input type="number" min="1" max="30" value="15" ng-model="numberOfQuestions">
 <table dir="rtl" class="table">
     <tr i>
         <th>
@@ -19,7 +28,7 @@
         </th>
         <th></th>
     </tr>
-    <tr name="tr {{$index+1}}" class="success-{{todo.done}}" ng-repeat="todo in todos">
+    <tr name="tr {{$index+1}}" class="success-{{todo.done}}" ng-repeat="todo in todos |limitTo: numberOfQuestions">
         <td>{{$index+1}}</td>
         <td>
             {{todo.title}}
@@ -59,27 +68,37 @@
 </ul>
         </td>
     </tr>
-</table>    
- <center> <input type="submit" value="Submit"> </center>
+</table>     
+ <center> <input type="submit" value="Submit" class="btn btn-default"> <button type="button" data-dismiss="modal" ng-click="ref()" class="btn btn-default" >Refresh Questions</button> </center>
+
+
+<!-- Modal -->
+<div id="myModal" dir="ltr" color="black" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+       <center> <h4 class="modal-title">Results</h4> </center>
+      </div>
+      <div class="modal-body">
+        <p id="modalText">Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <center>
+        <button type="button" class="btn btn-default" data-dismiss="modal">See Answers</button>
+        <button type="button" data-dismiss="modal" ng-click="ref()" class="btn btn-default" >Refresh Questions</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 </form>
 </div>
 </body>
 </html>
 <script type="text/javascript">
-    function get_action(form) {
-        for (var j = 1 ;j < 11; j++) {
-            var radios = document.getElementsByName(j.toString());
-            for (var i = 0, length = radios.length; i < length; i++) {
-                    if (radios[i].checked) {
-                        var x = "answer " + j.toString();
-                        if (radios[i].value.localeCompare(document.getElementsByName(x)[0].value) == 0){
-                            alert("true");
-                        }
-                        // only one radio can be logically checked, don't check the rest
-                        break;
-                    }
-    }
-    }
-}
 </script>
 

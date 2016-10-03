@@ -23,6 +23,7 @@ public class Todo {
     private String answer2;
     private String answer3;
     private String answer4;
+    private String category;
     private String answer[]= new String[4];
     private List<String> test= new ArrayList<String>();
     
@@ -30,6 +31,7 @@ public class Todo {
         this.id = ((ObjectId) dbObject.get("_id")).toString();
         this.title = dbObject.getString("title");
         this.done = dbObject.getBoolean("done");
+        this.category = dbObject.getString("category");
         this.createdOn = dbObject.getDate("createdOn");
         this.coranswer = dbObject.getString("coranswer");
         answer[0]=dbObject.getString("answer1");
@@ -39,6 +41,10 @@ public class Todo {
         for(int i=0;i<4;i++)
         	test.add(i, answer[i]);
         Collections.shuffle(test); //shuffle answers
+    }
+    
+    public String getCategory(){
+    	return this.category;
     }
     
     public void createAnswers(){

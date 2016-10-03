@@ -50,12 +50,56 @@
 
 
 
- app.controller('ListCtrl', function ($scope, $http) {
+ app.controller('ListCtrl', function ($scope, $http, $location ,$route) {
+
+        $http.get('/api/v1/getallcategories').success(function (data) {
+        $scope.categories = data;
+        for(var k=0;k<$scope.categories.length;k++)
+          $scope.selection.push($scope.categories[k]);
+    }).error(function (data, status) {
+        console.log('Error ' + data)
+    })
+
+
+
+
+
+
+
     $http.get('/api/v1/todos').success(function (data) {
         $scope.todos = data;
     }).error(function (data, status) {
         console.log('Error ' + data)
-    })
+    });
+
+
+
+
+  $scope.selection = [];
+  $scope.toggleSelection = function toggleSelection(fruitName) {
+  var idx = $scope.selection.indexOf(fruitName);
+
+    // is currently selected
+    if (idx > -1) {
+      $scope.selection.splice(idx, 1);
+    }
+
+    // is newly selected
+    else {
+      $scope.selection.push(fruitName);
+    }
+  };
+
+  Array.prototype.contains = function(obj) {
+    var i = this.length;
+    while (i--) {
+        if (this[i] === obj) {
+            return true;
+        }
+    }
+    return false;
+}
+
 
 
 
@@ -68,23 +112,53 @@
         })
     }
 
+
+
+
     $scope.getans = function(form){
-        for (var j = 1 ;j < 6; j++) {
+        var counter=0;
+        for (var j = 1 ;j < $scope.numberOfQuestions+1; j++) {
             var x = "tr " + j.toString();
             var radios = document.getElementsByName(j.toString());
             for (var i = 0, length = radios.length; i < length; i++) {
-                if (radios[i].checked) {
                     var selector = 'label[for=' + radios[i].id + ']'
                     var label = document.querySelector(selector);
+                if (radios[i].checked) {
+
                     if(radios[i].value.localeCompare($scope.todos[j-1].coranswer)==0)
-                        var s=1;
+                        counter++;
                     else{
                         radios[i].style.color="red";
                         label.style.color="red";
                     }
             }
+                else{
+                    if(radios[i].value.localeCompare($scope.todos[j-1].coranswer)==0){
+                        label.style.color="#0DFF92";
+                    }
+                }
         }
     }
+
+        
+        var text = "you got write: ";
+        text=text + counter.toString();
+        document.getElementById("modalText").innerHTML = text.toString();
+
+        $('#myModal').modal();
+        if(counter== $scope.numberOfQuestions)
+            $('#myModal').data('bs.modal').$backdrop.css('background-color','green');
+        else
+            $('#myModal').data('bs.modal').$backdrop.css('background-color','red'); 
+}
+
+    
+    $scope.ref = function(ref){
+             $http.post('/api/v1/getfilterd' , $scope.selection).success(function (data) {
+            $scope.todos = data;
+    });
+            window.scrollTo(0, 0);
+
 }
 });
 
@@ -92,6 +166,16 @@
     $scope.todo = {
         done: false
     };
+
+
+
+        $http.get('/api/v1/getallcategories').success(function (data) {
+        $scope.categories = data;
+    }).error(function (data, status) {
+        console.log('Error ' + data)
+    })
+
+
 
 
     $scope.createTodo = function () {

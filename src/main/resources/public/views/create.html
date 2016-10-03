@@ -1,4 +1,4 @@
-<form class="form-horizontal" role="form" ng-submit="createTodo()">
+<form class="form-horizontal" ng-app="todoapp" role="form" ng-submit="createTodo()">
     <div class="form-group">
         <label for="title" class="col-sm-2 control-label">Title</label>
 
@@ -29,7 +29,7 @@
         <label for="title" class="col-sm-2 control-label">Answer 3</label>
 
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="answer3" placeholder="Answer 1" ng-model="todo.answer3">
+            <input type="text" class="form-control" id="answer3" placeholder="Answer 3" ng-model="todo.answer3">
         </div>
     </div>
 
@@ -43,7 +43,8 @@
     </div>
 
         <div class="form-group">
-        <label for="Answer4" class="col-sm-2 control-label">Answer4</label>
+        <div class="col-sm-10">
+        <label for="Answer4" class="col-sm-2 control-label">Correct Answer</label>
               <select name="singleSelect" id="coranswer" ng-model="todo.coranswer">
               <option value={{todo.answer1}}>1</option>
               <option value={{todo.answer2}}>2</option>
@@ -51,7 +52,16 @@
               <option value={{todo.answer4}}>4</option>
         </select>
     </div>
+</div>
 
+        <div class="form-group">
+            <div class="col-sm-10">
+        <label for="repeatSelect"> Repeat select: </label>
+        <select name="repeatSelect" id="repeatSelect" ng-model="todo.category">
+        <option ng-repeat="category in categories" value="{{category.title}}">{{category.title}}</option>
+        </select>
+        </div>
+    </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-default">New Todo</button>
